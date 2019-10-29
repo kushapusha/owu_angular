@@ -1,13 +1,13 @@
 <!--FIRST TASK-->
 
-<input type="text" (input)="OnInput($event)">
+<input type="text" (input)="OnInput($event)" placeholder="Enter city">
 
 <button (click)="OnClick()" style="margin-left: 10px">
-  Show text
+  Show house
 </button>
 <br>
 
-{{inputShow}}
+{{inputShow | json}}
 
 <br>
 

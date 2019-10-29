@@ -7,7 +7,7 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   inputValue: string = '';
-  inputShow: string = '';
+  inputShow: object;
   pageReg: boolean;
   pageLog: boolean;
   show: boolean;
@@ -39,7 +39,10 @@ export class AppComponent {
   ];
 
   OnClick() {
-    this.inputShow = this.inputValue;
+    const house = this.houses.find(someHouse => {
+      return someHouse.city === this.inputValue;
+    });
+    this.inputShow = house;
   }
 
   OnInput(event) {
