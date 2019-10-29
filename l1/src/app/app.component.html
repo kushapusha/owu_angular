@@ -1,0 +1,58 @@
+<!--FIRST TASK-->
+
+<input type="text" (input)="OnInput($event)">
+
+<button (click)="OnClick()" style="margin-left: 10px">
+  Show text
+</button>
+<br>
+
+{{inputShow}}
+
+<br>
+
+<!--SECOND TASK-->
+
+<button (click)="regForm()" style="margin-right: 10px">
+  Join
+</button>
+
+<button (click)="logForm()">
+  Sign In
+</button>
+
+<form *ngIf="pageReg">
+  <input type="text" placeholder="Name"><br>
+  <input type="text" placeholder="Surname"><br>
+  <input type="text" placeholder="e-mail"><br>
+  <input type="text" placeholder="password"><br>
+  <button>Join</button>
+</form>
+
+<form *ngIf="pageLog">
+  <input type="text" placeholder="e-mail"><br>
+  <input type="text" placeholder="password"><br>
+  <button>Sing in</button>
+</form>
+
+
+<br>
+
+<!--THIRD TASK-->
+
+<button (click)="showHouses()" style="margin-top: 20px">
+  Show houses
+</button>
+
+<div *ngIf="show">
+  <div *ngFor="let house of houses">
+    <p>City: {{house.city}};
+      Street: {{house.street}};
+      Rooms: {{house.rooms}};
+      Price: {{house.price}}.</p>
+  </div>
+</div>
+
+
+
+
