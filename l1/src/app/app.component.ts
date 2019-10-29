@@ -7,10 +7,10 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   inputValue: string = '';
-  inputShow: object;
   pageReg: boolean;
   pageLog: boolean;
   show: boolean;
+  searchedHouses;
   houses = [
     {
       city: 'Lviv',
@@ -39,10 +39,9 @@ export class AppComponent {
   ];
 
   OnClick() {
-    const house = this.houses.find(someHouse => {
-      return someHouse.city === this.inputValue;
-    });
-    this.inputShow = house;
+    this.searchedHouses = this.houses.filter(houses => {
+      return houses.city === this.inputValue
+    })
   }
 
   OnInput(event) {
