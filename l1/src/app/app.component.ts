@@ -39,9 +39,7 @@ export class AppComponent {
   ];
 
   OnClick() {
-    this.searchedHouses = this.houses.filter(houses => {
-      return houses.city === this.inputValue
-    })
+    this.searchedHouses = this.houses.filter(houses => houses.city === this.inputValue)
   }
 
   OnInput(event) {
