@@ -6,35 +6,62 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  inputValue: string = '';
+  inputValue: string;
   pageReg: boolean;
   pageLog: boolean;
   show: boolean;
+  shortInfo: boolean = true;
+  fullInfo: boolean;
+  showHousesRegForm: boolean;
   searchedHouses;
+  infoAboutLog: string;
+
+  newUser = {
+    name: '',
+    email: '',
+    password: '',
+    is_blocked: Boolean(Math.floor(Math.random() * 2))
+  };
+
+  findUser = {
+    email: '',
+    password: ''
+  };
+
+  users = [
+    {
+      name: 'Vika',
+      email: 'vika@dls.dls',
+      password: 'wf1ef23',
+      is_blocked: Boolean(Math.floor(Math.random() * 2))
+    },
+    {
+      name: 'Ira',
+      email: 'ira@dls.dls',
+      password: '293rujhf',
+      is_blocked: Boolean(Math.floor(Math.random() * 2))
+    }
+  ];
+
+  newHouse = {
+    city: '',
+    street: '',
+    price: 0,
+    user: this.users[Math.floor(Math.random() * this.users.length)]
+  };
+
   houses = [
     {
       city: 'Lviv',
       street: 'Korotka',
-      rooms: 3,
-      price: 1000
+      price: 1000,
+      user: this.users[Math.floor(Math.random() * this.users.length)]
     },
     {
       city: 'Kyiv',
       street: 'Shevchenka',
-      rooms: 1,
-      price: 5000
-    },
-    {
-      city: 'Odesa',
-      street: 'Malynova',
-      rooms: 2,
-      price: 3000
-    },
-    {
-      city: 'Uzhhorod',
-      street: 'Sirka',
-      rooms: 2,
-      price: 1000
+      price: 5000,
+      user: this.users[Math.floor(Math.random() * this.users.length)]
     }
   ];
 
@@ -56,7 +83,32 @@ export class AppComponent {
     this.pageReg = false;
   }
 
+  regUser() {
+    this.users.push(this.newUser);
+    console.log(this.users);
+  }
+
+  logUser() {
+    const findedUser = this.users.find(user =>
+      this.findUser.email === user.email &&
+      this.findUser.password === user.password);
+    findedUser ? this.infoAboutLog = 'Welcome' : this.infoAboutLog = 'User is not found'
+  }
+
+  showRegHousesForm() {
+    this.showHousesRegForm = !this.showHousesRegForm
+  }
+
+  createNewHouse() {
+    this.houses.push(this.newHouse);
+  }
+
   showHouses() {
     this.show = !this.show;
+  }
+
+  showFullInfo() {
+    this.fullInfo = !this.fullInfo;
+    this.shortInfo = !this.shortInfo
   }
 }

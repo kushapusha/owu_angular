@@ -1,0 +1,31 @@
+input, button {
+  margin: 5px;
+}
+
+
+.for_blocked {
+  border: 1px solid darkred;
+  color: darkred;
+}
+
+.green {
+  border: 1px solid green;
+}
+
+.invalid_input {
+  border: 1px solid darkred;
+}
+
+.invalid_input:focus {
+  outline: none;
+  border-color: darkred;
+}
+
+.valid_input {
+  border: 1px solid darkgrey;
+}
+
+.valid_input:focus {
+  outline: none;
+}
+

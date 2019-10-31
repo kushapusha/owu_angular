@@ -2,7 +2,7 @@
 
 <input type="text" (input)="OnInput($event)" placeholder="Enter city">
 
-<button (click)="OnClick()" style="margin-left: 10px">
+<button (click)="OnClick()">
   Show house
 </button>
 <br>
@@ -13,7 +13,7 @@
 
 <!--SECOND TASK-->
 
-<button (click)="regForm()" style="margin-right: 10px">
+<button (click)="regForm()">
   Join
 </button>
 
@@ -21,35 +21,93 @@
   Sign In
 </button>
 
-<form *ngIf="pageReg">
-  <input type="text" placeholder="Name"><br>
-  <input type="text" placeholder="Surname"><br>
-  <input type="text" placeholder="e-mail"><br>
-  <input type="text" placeholder="password"><br>
-  <button>Join</button>
+<form *ngIf="pageReg" (ngSubmit)="regUser()" #newUserForm="ngForm">
+  <input type="text" name="name" placeholder="Name"
+         #nameValue="ngModel"
+         [(ngModel)]="newUser.name"
+         [ngClass]="nameValue.invalid && nameValue.touched ? 'invalid_input' : 'valid_input'"
+         required><br>
+
+  <input type="text" name="email" placeholder="e-mail"
+         #emailValue="ngModel"
+         [(ngModel)]="newUser.email"
+         [ngClass]="emailValue.invalid && emailValue.touched ? 'invalid_input' : 'valid_input'"
+         required
+         email><br>
+
+  <input type="text" name="password" placeholder="password"
+         #passValue="ngModel"
+         [(ngModel)]="newUser.password"
+         [ngClass]="passValue.invalid && passValue.touched ? 'invalid_input' : 'valid_input'"
+         required
+         minlength="5"><br>
+
+  <button [disabled]="newUserForm.invalid">Join</button>
 </form>
 
-<form *ngIf="pageLog">
-  <input type="text" placeholder="e-mail"><br>
-  <input type="text" placeholder="password"><br>
-  <button>Sing in</button>
+<form *ngIf="pageLog" (ngSubmit)="logUser()" #logUserForm = "ngForm">
+  <input type="text" name="email" placeholder="e-mail"
+         [(ngModel)]="findUser.email"
+         email><br>
+
+  <input type="text" name="password" placeholder="password"
+         [(ngModel)]="findUser.password"><br>
+
+  <button [disabled]="logUserForm.invalid">Sing in</button>
 </form>
 
+<p>{{infoAboutLog}}</p>
+
+<br>
+
+<button (click)="showRegHousesForm()">
+  Add new House
+</button>
+
+<form *ngIf="showHousesRegForm" (ngSubmit)="createNewHouse()" #newHouseForm="ngForm">
+  <input type="text" name="city" placeholder="City"
+         #cityValue="ngModel"
+         [(ngModel)]="newHouse.city"
+         [ngClass]="cityValue.invalid && cityValue.touched ? 'invalid_input' : 'valid_input'"
+         required><br>
+
+  <input type="text" name="street" placeholder="Street"
+         #streetValue="ngModel"
+         [(ngModel)]="newHouse.street"
+         [ngClass]="streetValue.invalid && streetValue.touched ? 'invalid_input' : 'valid_input'"
+         required><br>
+
+  <input type="text" name="price" placeholder="Price"
+         #priceValue="ngModel"
+         [(ngModel)]="newHouse.price"
+         [ngClass]="priceValue.invalid && priceValue.touched ? 'invalid_input' : 'valid_input'"
+         required><br>
+
+  <button [disabled]="newHouseForm.invalid">Add your house</button>
+</form>
 
 <br>
 
 <!--THIRD TASK-->
 
-<button (click)="showHouses()" style="margin-top: 20px">
+<button (click)="showHouses()">
   Show houses
 </button>
 
 <div *ngIf="show">
   <div *ngFor="let house of houses">
-    <p>City: {{house.city}};
+    <p [ngClass]="house.user.is_blocked ? 'for_blocked' : 'green'" *ngIf="shortInfo">
+      City: {{house.city}};
+      Price: {{house.price}}.
+    </p>
+
+    <p *ngIf="fullInfo">
+      City: {{house.city}};
       Street: {{house.street}};
-      Rooms: {{house.rooms}};
-      Price: {{house.price}}.</p>
+      Price: {{house.price}};
+      Owner: {{house.user | json}}.
+    </p>
+    <button [disabled]="house.user.is_blocked" (click)="showFullInfo()">Show full info</button>
   </div>
 </div>
 
