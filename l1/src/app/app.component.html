@@ -98,15 +98,15 @@
 <div *ngIf="show">
   <div *ngFor="let house of houses">
 
-    <p [ngClass]="house.user.is_blocked ? 'for_blocked' : 'for_unblocked'" *ngIf="shortInfo">
-      City: {{house.city}};
-      Price: {{house.price}}.
-    </p>
+    <span [ngClass]="house.user.is_blocked ? 'for_blocked' : 'for_unblocked'" *ngIf="shortInfo">
+      City: {{house.city}}<br>
+      Price: {{house.price}}<br>
+    </span>
 
-    <div *ngIf="showedHouseId === house.id && fullInfo">
-      Street: {{house.street}};
-      Owner: {{house.user.name}}, {{house.user.email}}.
-    </div>
+    <span *ngIf="showedHouseId === house.id && fullInfo">
+      Street: {{house.street}}<br>
+      Owner: {{house.user.name}}, {{house.user.email}}<br>
+    </span>
 
     <button [disabled]="house.user.is_blocked" (click)="showFullInfo(house.id)">Show full info</button>
 

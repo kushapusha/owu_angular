@@ -2,9 +2,7 @@ input, button {
   margin: 5px;
 }
 
-
 .for_blocked {
-  border: 1px solid darkred;
   color: darkred;
 }
 
