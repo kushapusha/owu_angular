@@ -26,7 +26,8 @@
          #nameValue="ngModel"
          [(ngModel)]="newUser.name"
          [ngClass]="nameValue.invalid && nameValue.touched ? 'invalid_input' : 'valid_input'"
-         required><br>
+         required>
+  <br>
 
   <input type="text" name="email" placeholder="e-mail"
          #emailValue="ngModel"
@@ -45,7 +46,7 @@
   <button [disabled]="newUserForm.invalid">Join</button>
 </form>
 
-<form *ngIf="pageLog" (ngSubmit)="logUser()" #logUserForm = "ngForm">
+<form *ngIf="pageLog" (ngSubmit)="logUser()" #logUserForm="ngForm">
   <input type="text" name="email" placeholder="e-mail"
          [(ngModel)]="findUser.email"
          email><br>
@@ -102,14 +103,12 @@
       Price: {{house.price}}.
     </p>
 
-    <p *ngIf="fullInfo">
-      City: {{house.city}};
+    <div *ngIf="showedHouseId === house.id && fullInfo">
       Street: {{house.street}};
-      Price: {{house.price}};
       Owner: {{house.user.name}}, {{house.user.email}}.
-    </p>
+    </div>
 
-    <button [disabled]="house.user.is_blocked" (click)="showFullInfo()">Show full info</button>
+    <button [disabled]="house.user.is_blocked" (click)="showFullInfo(house.id)">Show full info</button>
 
   </div>
 </div>

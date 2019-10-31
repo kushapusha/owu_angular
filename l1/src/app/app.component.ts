@@ -16,6 +16,8 @@ export class AppComponent {
   searchedHouses;
   infoAboutLog: string;
 
+  showedHouseId = -1;
+
   newUser = {
     name: '',
     email: '',
@@ -52,12 +54,14 @@ export class AppComponent {
 
   houses = [
     {
+      id: 0,
       city: 'Lviv',
       street: 'Korotka',
       price: 1000,
       user: this.users[Math.floor(Math.random() * this.users.length)]
     },
     {
+      id: 1,
       city: 'Kyiv',
       street: 'Shevchenka',
       price: 5000,
@@ -100,15 +104,15 @@ export class AppComponent {
   }
 
   createNewHouse() {
-    this.houses.push(this.newHouse);
+    this.houses.push({...this.newHouse, id: this.houses.length}); // TODO how it works
   }
 
   showHouses() {
     this.show = !this.show;
   }
 
-  showFullInfo() {
+  showFullInfo(id: number) {
+    this.showedHouseId = id;
     this.fullInfo = !this.fullInfo;
-    this.shortInfo = !this.shortInfo
   }
 }
