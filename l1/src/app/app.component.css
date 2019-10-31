@@ -8,8 +8,8 @@ input, button {
   color: darkred;
 }
 
-.green {
-  border: 1px solid green;
+.for_unblocked {
+  border: none;
 }
 
 .invalid_input {

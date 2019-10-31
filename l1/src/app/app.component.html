@@ -96,7 +96,8 @@
 
 <div *ngIf="show">
   <div *ngFor="let house of houses">
-    <p [ngClass]="house.user.is_blocked ? 'for_blocked' : 'green'" *ngIf="shortInfo">
+
+    <p [ngClass]="house.user.is_blocked ? 'for_blocked' : 'for_unblocked'" *ngIf="shortInfo">
       City: {{house.city}};
       Price: {{house.price}}.
     </p>
@@ -105,9 +106,11 @@
       City: {{house.city}};
       Street: {{house.street}};
       Price: {{house.price}};
-      Owner: {{house.user | json}}.
+      Owner: {{house.user.name}}, {{house.user.email}}.
     </p>
+
     <button [disabled]="house.user.is_blocked" (click)="showFullInfo()">Show full info</button>
+
   </div>
 </div>
 
