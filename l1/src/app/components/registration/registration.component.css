@@ -1,0 +1,20 @@
+input, button {
+  margin: 5px;
+}
+
+.invalid_input {
+  border: 1px solid darkred;
+}
+
+.invalid_input:focus {
+  outline: none;
+  border-color: darkred;
+}
+
+.valid_input {
+  border: 1px solid darkgrey;
+}
+
+.valid_input:focus {
+  outline: none;
+}

@@ -1,0 +1,16 @@
+<div *ngFor="let house of houses">
+
+    <span [ngClass]="house.user.is_blocked ? 'for_blocked' : 'for_unblocked'" *ngIf="shortInfo">
+      City: {{house.city}}<br>
+      Price: {{house.price | convertPipe: 25}}<br>
+    </span>
+
+  <span *ngIf="showedHouseId === house.id && fullInfo">
+      Street: {{house.street}}<br>
+      Owner: {{house.user.name}}, {{house.user.email}}<br>
+    </span>
+
+  <button [disabled]="house.user.is_blocked" (click)="showFullInfo(house.id)">Show full info</button>
+
+</div>
+

@@ -6,76 +6,43 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  inputValue: string;
   pageReg: boolean;
   pageLog: boolean;
   show: boolean;
-  shortInfo: boolean = true;
-  fullInfo: boolean;
   showHousesRegForm: boolean;
-  searchedHouses;
   infoAboutLog: string;
-
-  showedHouseId = -1;
-
-  newUser = {
-    name: '',
-    email: '',
-    password: '',
-    is_blocked: Boolean(Math.floor(Math.random() * 2))
-  };
-
-  findUser = {
-    email: '',
-    password: ''
-  };
 
   users = [
     {
       name: 'Vika',
       email: 'vika@dls.dls',
       password: 'wf1ef23',
-      is_blocked: Boolean(Math.floor(Math.random() * 2))
+      is_blocked: false
     },
     {
       name: 'Ira',
       email: 'ira@dls.dls',
       password: '293rujhf',
-      is_blocked: Boolean(Math.floor(Math.random() * 2))
+      is_blocked: true
     }
   ];
-
-  newHouse = {
-    city: '',
-    street: '',
-    price: 0,
-    user: this.users[Math.floor(Math.random() * this.users.length)]
-  };
 
   houses = [
     {
-      id: 0,
+      id: 1,
       city: 'Lviv',
       street: 'Korotka',
       price: 1000,
-      user: this.users[Math.floor(Math.random() * this.users.length)]
+      user: this.users[0]
     },
     {
-      id: 1,
+      id: 2,
       city: 'Kyiv',
       street: 'Shevchenka',
       price: 5000,
-      user: this.users[Math.floor(Math.random() * this.users.length)]
+      user: this.users[1]
     }
   ];
-
-  OnClick() {
-    this.searchedHouses = this.houses.filter(houses => houses.city === this.inputValue)
-  }
-
-  OnInput(event) {
-    this.inputValue = event.target.value;
-  }
 
   regForm() {
     this.pageReg = !this.pageReg;
@@ -87,15 +54,15 @@ export class AppComponent {
     this.pageReg = false;
   }
 
-  regUser() {
-    this.users.push(this.newUser);
+  regUser(newUser) {
+    this.users.push(newUser);
     console.log(this.users);
   }
 
-  logUser() {
+  logUser(findUser) {
     const findedUser = this.users.find(user =>
-      this.findUser.email === user.email &&
-      this.findUser.password === user.password);
+      findUser.email === user.email &&
+      findUser.password === user.password);
     findedUser ? this.infoAboutLog = 'Welcome' : this.infoAboutLog = 'User is not found'
   }
 
@@ -103,16 +70,14 @@ export class AppComponent {
     this.showHousesRegForm = !this.showHousesRegForm
   }
 
-  createNewHouse() {
-    this.houses.push({...this.newHouse, id: this.houses.length}); // TODO how it works
+  createNewHouse(newHouse) {
+    this.houses.push({...newHouse,
+      id: this.houses.length,
+      user: this.users[Math.floor(Math.random() * this.users.length)]});
   }
 
   showHouses() {
     this.show = !this.show;
   }
 
-  showFullInfo(id: number) {
-    this.showedHouseId = id;
-    this.fullInfo = !this.fullInfo;
-  }
 }

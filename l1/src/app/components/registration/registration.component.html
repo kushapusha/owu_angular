@@ -1,0 +1,26 @@
+<form (ngSubmit)="regUser()" #newUserForm="ngForm">
+  <input type="text" name="name" placeholder="Name"
+         #nameValue="ngModel"
+         [(ngModel)]="newUser.name"
+         [ngClass]="nameValue.invalid && nameValue.touched ? 'invalid_input' : 'valid_input'"
+         required>
+  <br>
+
+  <input type="text" name="email" placeholder="e-mail"
+         #emailValue="ngModel"
+         [(ngModel)]="newUser.email"
+         [ngClass]="emailValue.invalid && emailValue.touched ? 'invalid_input' : 'valid_input'"
+         required
+         email><br>
+
+  <input type="text" name="password" placeholder="password"
+         #passValue="ngModel"
+         [(ngModel)]="newUser.password"
+         [ngClass]="passValue.invalid && passValue.touched ? 'invalid_input' : 'valid_input'"
+         required
+         minlength="5"><br>
+
+  <button [disabled]="newUserForm.invalid">Join</button>
+</form>
+
+

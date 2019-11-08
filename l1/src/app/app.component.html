@@ -1,117 +1,60 @@
-<!--FIRST TASK-->
+<!--SEARCH-HOUSES-->
 
-<input type="text" (input)="OnInput($event)" placeholder="Enter city">
-
-<button (click)="OnClick()">
-  Show house
-</button>
-<br>
-
-{{searchedHouses | json}}
+<app-search-houses
+  [houses] = "houses"
+></app-search-houses>
 
 <br>
 
-<!--SECOND TASK-->
+<!--JOIN-->
 
 <button (click)="regForm()">
   Join
 </button>
 
+<app-registration
+  *ngIf="pageReg"
+  (registUser)="regUser($event)"
+></app-registration>
+
+<!--LOGIN-->
+
 <button (click)="logForm()">
   Sign In
 </button>
 
-<form *ngIf="pageReg" (ngSubmit)="regUser()" #newUserForm="ngForm">
-  <input type="text" name="name" placeholder="Name"
-         #nameValue="ngModel"
-         [(ngModel)]="newUser.name"
-         [ngClass]="nameValue.invalid && nameValue.touched ? 'invalid_input' : 'valid_input'"
-         required>
-  <br>
-
-  <input type="text" name="email" placeholder="e-mail"
-         #emailValue="ngModel"
-         [(ngModel)]="newUser.email"
-         [ngClass]="emailValue.invalid && emailValue.touched ? 'invalid_input' : 'valid_input'"
-         required
-         email><br>
-
-  <input type="text" name="password" placeholder="password"
-         #passValue="ngModel"
-         [(ngModel)]="newUser.password"
-         [ngClass]="passValue.invalid && passValue.touched ? 'invalid_input' : 'valid_input'"
-         required
-         minlength="5"><br>
-
-  <button [disabled]="newUserForm.invalid">Join</button>
-</form>
-
-<form *ngIf="pageLog" (ngSubmit)="logUser()" #logUserForm="ngForm">
-  <input type="text" name="email" placeholder="e-mail"
-         [(ngModel)]="findUser.email"
-         email><br>
-
-  <input type="text" name="password" placeholder="password"
-         [(ngModel)]="findUser.password"><br>
-
-  <button [disabled]="logUserForm.invalid">Sing in</button>
-</form>
+<app-login
+  *ngIf="pageLog"
+  (loginedUser)="logUser($event)"
+></app-login>
 
 <p>{{infoAboutLog}}</p>
 
 <br>
 
+<!--CREATE HOUSE-->
+
 <button (click)="showRegHousesForm()">
   Add new House
 </button>
 
-<form *ngIf="showHousesRegForm" (ngSubmit)="createNewHouse()" #newHouseForm="ngForm">
-  <input type="text" name="city" placeholder="City"
-         #cityValue="ngModel"
-         [(ngModel)]="newHouse.city"
-         [ngClass]="cityValue.invalid && cityValue.touched ? 'invalid_input' : 'valid_input'"
-         required><br>
-
-  <input type="text" name="street" placeholder="Street"
-         #streetValue="ngModel"
-         [(ngModel)]="newHouse.street"
-         [ngClass]="streetValue.invalid && streetValue.touched ? 'invalid_input' : 'valid_input'"
-         required><br>
-
-  <input type="text" name="price" placeholder="Price"
-         #priceValue="ngModel"
-         [(ngModel)]="newHouse.price"
-         [ngClass]="priceValue.invalid && priceValue.touched ? 'invalid_input' : 'valid_input'"
-         required><br>
-
-  <button [disabled]="newHouseForm.invalid">Add your house</button>
-</form>
+<app-registration-house
+  *ngIf="showHousesRegForm"
+  (addHouse)="createNewHouse($event)"
+></app-registration-house>
 
 <br>
 
-<!--THIRD TASK-->
+<!--SHOW HOUSES-->
 
 <button (click)="showHouses()">
   Show houses
 </button>
 
-<div *ngIf="show">
-  <div *ngFor="let house of houses">
-
-    <span [ngClass]="house.user.is_blocked ? 'for_blocked' : 'for_unblocked'" *ngIf="shortInfo">
-      City: {{house.city}}<br>
-      Price: {{house.price}}<br>
-    </span>
-
-    <span *ngIf="showedHouseId === house.id && fullInfo">
-      Street: {{house.street}}<br>
-      Owner: {{house.user.name}}, {{house.user.email}}<br>
-    </span>
-
-    <button [disabled]="house.user.is_blocked" (click)="showFullInfo(house.id)">Show full info</button>
-
-  </div>
-</div>
+<app-show-all-houses
+  *ngIf="show"
+  [houses] = "houses"
+></app-show-all-houses>
 
 
 

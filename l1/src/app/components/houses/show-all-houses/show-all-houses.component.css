@@ -1,0 +1,7 @@
+.for_blocked {
+  color: darkred;
+}
+
+.for_unblocked {
+  border: none;
+}

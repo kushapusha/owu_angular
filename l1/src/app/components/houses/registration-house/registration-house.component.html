@@ -1,0 +1,21 @@
+<form  (ngSubmit)="createNewHouse()" #newHouseForm="ngForm">
+  <input type="text" name="city" placeholder="City"
+         #cityValue="ngModel"
+         [(ngModel)]="newHouse.city"
+         [ngClass]="cityValue.invalid && cityValue.touched ? 'invalid_input' : 'valid_input'"
+         required><br>
+
+  <input type="text" name="street" placeholder="Street"
+         #streetValue="ngModel"
+         [(ngModel)]="newHouse.street"
+         [ngClass]="streetValue.invalid && streetValue.touched ? 'invalid_input' : 'valid_input'"
+         required><br>
+
+  <input type="text" name="price" placeholder="Price"
+         #priceValue="ngModel"
+         [(ngModel)]="newHouse.price"
+         [ngClass]="priceValue.invalid && priceValue.touched ? 'invalid_input' : 'valid_input'"
+         required><br>
+
+  <button [disabled]="newHouseForm.invalid">Add your house</button>
+</form>

@@ -1,0 +1,10 @@
+<form (ngSubmit)="logUser()" #logUserForm="ngForm">
+  <input type="text" name="email" placeholder="e-mail"
+         [(ngModel)]="findUser.email"
+         email><br>
+
+  <input type="text" name="password" placeholder="password"
+         [(ngModel)]="findUser.password"><br>
+
+  <button [disabled]="logUserForm.invalid">Sing in</button>
+</form>
